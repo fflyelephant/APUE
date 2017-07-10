@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 		printf("fork error\n");
 	else if(pid == 0)/* 在子进程中启动新进程(pid不改变) */
 	{
-		printf("execle pid:%d\n", getpid());
+		printf("execle pid:%ld\n", (long)getpid());
 		if(execle("./echoall", "echoall", "argv[1]", "argv[2]", "argv[3]", (char *)0, env_init) < 0)/* execle 启动新进程(使用新的环境变量env_init) */
 			printf("execle error\n");
 	}
@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
 		printf("fork error\n");
 	else if(pid == 0)
 	{
-		printf("execlp pid:%d\n", getpid());
+		printf("execlp pid:%ld\n", (long)getpid());
 		if(execlp("echoall", "echoall", "argv[1]", (char *)0) < 0)/* execlp 启动新进程(沿用当前环境变量，且echoall程序要在PATH路径中找得到) */
 			printf("execlp error\n");
 	}	
