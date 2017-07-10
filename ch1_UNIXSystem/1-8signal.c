@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 
 	return 0;
 }
-/*result
+/*result:
 
 	stone@ubuntu:~/test_my/github_test/APUE/ch1_UNIXSystem$ ./a.out 
 	$ ls
