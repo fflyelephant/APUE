@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-#define BUFFSIZE 4096 
+#define BUFFSIZE 4096
 void handler_int(int signum)
 {
 	printf("got a SIGINT signal\n");
