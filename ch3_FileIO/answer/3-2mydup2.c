@@ -2,7 +2,8 @@
 #include <unistd.h>
 #include <errno.h>
 
-int mydup2(oldfd, newfd)
+#define MAX_FD ((int)sysconf(_SC_OPEN_MAX)) /* 一个进程最多能打开的文件数 */
+int mydup2(int oldfd, int newfd)
 {
 
 
@@ -10,6 +11,6 @@ int mydup2(oldfd, newfd)
 
 int main(int argc, char const *argv[])
 {
-	/* code */
+	printf("%d\n", MAX_FD);
 	return 0;
 }
