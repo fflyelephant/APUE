@@ -19,7 +19,7 @@ int main(int agrc, char *argv[])
 	}
 #if 0 
 	/* 在dirfd所表示的目录下打开文件text.txt */
-	if((fd = openat(dirfd, ".text.txt", O_RDWR | O_CREAT, 0666)) < 0)
+	if((fd = openat(dirfd, "./text.txt", O_RDWR | O_CREAT, 0666)) < 0)
 	{
 		perror("openat error");
 		exit(EXIT_FAILURE);
