@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
   result2:
 
     st@ubuntu:~/git_project$ od -c ./foo 
-	0000000   h   e  --> 只剩两个字节
+	0000000   h   e  --> 截断后只剩两个字节
 	0000002
 
 */
