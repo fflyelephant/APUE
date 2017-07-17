@@ -119,7 +119,7 @@ int main(int argc, char const *argv[])
 	stream : stdin  linebuffered    buffsize:1024 	-->stdin,stdout连接终端都是行缓冲，stderr是不缓冲的
 	stream : stdout linebuffered    buffsize:1024
 	stream : stderr unbuffered!     buffsize:1
-	stream : /etc/passwd    fullbuffered    buffsize:4096  --> 文件的读写都是全缓冲
+	stream : /etc/passwd    fullbuffered    buffsize:4096  --> 普通文件的读写默认都是全缓冲
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch5_StandardIO$ ./a.out < /etc/group > std.out 2>std.err
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch5_StandardIO$ cat std.out 
 	enter any character
