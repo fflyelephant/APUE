@@ -3,9 +3,9 @@
 
 int main(int argc, char const *argv[])
 {
-	char buff[64] = {0};
+	char buff[4] = {0};
 
-	while(fgets(buff, 64, stdin) != NULL)/* 行缓冲 */
+	while(fgets(buff, 4, stdin) != NULL)/* 行缓冲 */
 	{
 		if(fputs(buff, stdout) == EOF)
 		{

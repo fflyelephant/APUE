@@ -1,0 +1,9 @@
+6.1 见程序6-getspent.c文件，使用函数getspent函数通过sp->sp_namp参数找到对应的sp->sp_pwdp
+
+6.2 实现就是6-getspent.c文件，运行: sudo a.out
+
+6.3 见程序6-uname.c
+
+6.4 
+
+6.5 见程序6-time.c
