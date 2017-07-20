@@ -17,8 +17,8 @@ int main(int agrc, char *argv[])
 	int local_uninit;//局部变量、未初始化、栈(stack)
 	static int static_local_init = 1;//全局变量、静态存储区域、初始化、数据段(data)
 	static int static_local_uninit;//全局变量、静态存储区域、未初始化、未初始化数据段(bss)
-	const int const_local_init = 1;//局部常量、栈
-	const int const_local_uninit;//局部常量、栈
+	const  int const_local_init = 1;//局部常量、栈
+	const  int const_local_uninit;//局部常量、栈
 	char *p = malloc(1024);//p指向的内存、堆
 	return 0;
 }
