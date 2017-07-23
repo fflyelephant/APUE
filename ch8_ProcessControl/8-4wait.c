@@ -23,7 +23,7 @@ void pr_exit(int status)
 			WTERMSIG(status), 
 #ifdef WCOREDUMP
 			WCOREDUMP(status) ? "got a core file":" no core file"
-#endif
+#endif	
 			);
 	else if(WIFSTOPPED(status))//子进程停止
 		printf("child was stopped, signal number=%d\n", WSTOPSIG(status));
@@ -34,7 +34,16 @@ int main(int argc, char const *argv[])
 {
 	pid_t pid;
 	int status;
-	/*子进程正常终止*/
+	/*子进程return终止*/
+	if((pid = fork()) < 0)
+		printf("fork error\n");
+	else if(pid == 0)
+		return 0;
+	if(wait(&status) != pid)
+		printf("wait error\n");
+	pr_exit(status);
+
+	/*子进程exit终止*/
 	if((pid = fork()) < 0)
 		printf("fork error\n");
 	else if(pid == 0)
@@ -67,7 +76,8 @@ int main(int argc, char const *argv[])
 
 /*result:
 
-	st@ubuntu:~/git_project/APUE/ch8_proctl$ ./a.out 
+	st@ubuntu:~/git_project/APUE/ch8_ProcessControl$ ./a.out 
+	normal termination, exit status=0
 	normal termination, exit status=7
 	abnormal termination, signal number=6, got a core file
 	abnormal termination, signal number=8, got a core file
