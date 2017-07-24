@@ -45,10 +45,10 @@ int main(int argc, char const *argv[])
 	USER=unknown     ->execle使用了新的环境变量
 	PATH=/tmp
 	execlp pid:6042
-	echoall pid:6042 ->pid同样不变
+	echoall pid:6042 ->新进程pid同样不变
 	argv[0]:echoall
 	argv[1]:argv[1]
-	SSH_AGENT_PID=2064 ->execlp沿用默认的环境变量(较多)
+	SSH_AGENT_PID=2064 ->execlp沿用旧的环境变量(较多)
 	GPG_AGENT_INFO=/tmp/keyring-UGTERi/gpg:0:1
 	.....
 	.....
