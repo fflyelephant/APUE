@@ -42,7 +42,7 @@ int mysystem(const char *cmd)
 	}
 	else if(pid == 0){
 		execl("/bin/sh", "sh", "-c", cmd, (char *)0);
-		_exit(127);/* 不用exit防止IO缓冲(io缓冲会从父进程拷贝到子进程中来) */
+		_exit(127);/* execl error 不用exit防止IO缓冲(io缓冲会从父进程拷贝到子进程中来) */
 	}
 	else{
 		while(waitpid(pid, &status, 0) < 0)
