@@ -26,7 +26,7 @@ int main(int agrc, char *argv[])
 		local_var++;
 		printf("child global_var_addr:%p  value:%d\n", &global_var, global_var);
 		printf(" child local_var_addr:%p  value:%d\n", &local_var, local_var);
-		exit(0);
+		exit(0);// exit可能会关闭标注IO，导致父进程的printf返回-1(建议使用_exit()函数使程序可移植性更高)
 	}
 
 	if(waitpid(pid, &status, 0) < 0)
@@ -47,14 +47,14 @@ int main(int agrc, char *argv[])
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch8_ProcessControl$ ./a.out 
 	before fork! 
 	child global_var_addr:0x804a034  value:2
-	 child local_var_addr:0xbfa82120  value:2
+	child local_var_addr:0xbfa82120  value:2
 	father global_var_addr:0x804a034  value:1
 	father  local_var_addr:0xbfa82120  value:1
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch8_ProcessControl$ ./a.out >123
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch8_ProcessControl$ cat 123
 	before fork!-->exit(0)输出
 	child global_var_addr:0x804a034  value:2
-	 child local_var_addr:0xbf8aed50  value:2
+	child local_var_addr:0xbf8aed50  value:2
 	before fork!-->return 0输出
 	father global_var_addr:0x804a034  value:1
 	father  local_var_addr:0xbf8aed50  value:1

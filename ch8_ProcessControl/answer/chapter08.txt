@@ -1,0 +1,12 @@
+8.1 在8-1fork.c中，子进程的结束就是使用的exit()函数，但是父进程照样正常输出，这与我平台中exit()函数的实现有关。正如原文所讲:
+	    If the child calls exit, the implementation flushes the standard I/O streams. If this
+	is the only action taken by the library, then we will see no difference from the output
+	generated if the child called _exit. If the implementation also closes the standard I/O
+	streams, however, the memory representing the FILE object for the standard output
+	will be cleared out. Because the child is borrowing the parent’s address space, when the
+	parent resumes and calls printf, no output will appear and printf will return −1.
+	Note that the parent’s STDOUT_FILENO is still valid, as the child gets a copy of the
+	parent’s file descriptor array
+	参考:8-1.c
+
+8.2 
