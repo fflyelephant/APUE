@@ -80,7 +80,7 @@ int main(int argc, char const *argv[])
 	NZERO=20
 	Father nice value:20
 	Child nice value:20, adj:20
-	Now child nice value:39
+	Now child nice value:39 //nice的最大值是39，所以超过了39的都被写成39
 	parent count:20494970
 	child count:311921
 
