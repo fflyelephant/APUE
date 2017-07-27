@@ -12,3 +12,18 @@
 8.2 见8-2.c文件
 
 8.3 
+
+8.4
+	st@ubuntu:~/git_project/APUE/ch8_ProcessControl$ ./a.out ; ./a.out ; ./a.out 
+	from father process
+	from chilfd process
+	romf father process
+	rom child process
+	from father process
+	from child process
+
+8.5 argv[2]的值同样还是"/home/sar/bin/testinterp",execlp最后调用的是execve，execl最后调用的还是execve系统调用。
+
+8.6 见8-6.c文件 
+
+8.7 
