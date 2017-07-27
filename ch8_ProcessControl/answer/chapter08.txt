@@ -9,4 +9,6 @@
 	parent’s file descriptor array
 	参考:8-1.c
 
-8.2 
+8.2 见8-2.c文件
+
+8.3 
