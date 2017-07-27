@@ -1,7 +1,7 @@
 #include <stdio.h>		/* for convenience */
 #include <unistd.h>
 
-void output(const char *str)
+void output(char *str)
 {
 	char *ptr;
 	int c;
@@ -17,8 +17,20 @@ int main(int argc, char const *argv[])
 	if((pid = fork()) < 0)
 		printf("fork error\n");
 	else if(pid == 0)
-		output("form child process\n");
+		output("from child process\n");
 	else
 		output("from father process\n");
 	return 0;
 }
+
+/*result:<多次执行会出现竞争的情况>
+
+	st@ubuntu:~/git_project/APUE/ch8_ProcessControl$ ./a.out ; ./a.out ; ./a.out 
+	from father process
+	from child process
+	from father process
+	ffrom child process
+	rom father process
+
+
+*/
