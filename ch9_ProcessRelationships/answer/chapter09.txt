@@ -1,0 +1,4 @@
+9.1 因为登录shell的父进程是init进程，所以logout的时候init会收到SIGCHLD信号，此时记录会很准确.
+	网络登录中没有init进程参与，比如telnet登录，Telnetd会记录登入登出信息.
+
+9.2 见9-2.c文件实现
