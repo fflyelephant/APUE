@@ -32,3 +32,6 @@ int main(int argc, char const *argv[])
 	write(STDIN_FILENO, line, 1024);
 	return 0;
 }
+// 这里有一个问题,当SIGALRM信号到来,进入信号处理程序sig_alrm中,这时会设置当前进程的sig_mask,防止信号处理程序
+// 在执行过程中被其它信号再次中断,但是信号处理函数在longjmp跳转出去,此时进程的sig_mask是怎么变换的POSIX没有描述,
+// 最好是使用10-14中的sigsetjmp和siglongjmp函数来替代
