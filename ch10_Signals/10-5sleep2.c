@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 	printf("sleep2:%d\n", ret);
 	return 0;
 }
-/*使用函数间跳动解决22,23之前的竞争问题
+/*使用函数间跳动解决22,23之间的竞争问题
 
 	stone@cdWSCMPL07:~/test_my/github_test/APUE/ch10_Signals$ ./a.out 
 	大约3秒后...

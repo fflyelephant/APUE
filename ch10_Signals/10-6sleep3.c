@@ -23,7 +23,7 @@ static void sig_int(int signo)
 }
 
 
-unsigned int sleep2(unsigned int second)
+unsigned int sleep3(unsigned int second)
 {
 	if(signal(SIGALRM, sig_alrm) == SIG_ERR){
 		perror("signal alrm error");
@@ -46,8 +46,8 @@ unsigned int sleep2(unsigned int second)
 int main(int argc, char const *argv[])
 {
 	unsigned int ret;
-	ret = sleep2(3);
-	printf("sleep2:%d\n", ret);
+	ret = sleep3(3);
+	printf("sleep3:%d\n", ret);
 	return 0;
 }
 /*
