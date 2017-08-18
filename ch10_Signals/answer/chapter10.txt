@@ -1,0 +1,12 @@
+10.1 去掉之后进程一收到某个信号就会中断pause()函数而退出.
+
+10.2 将信号值转换为对应的字符串描述.
+
+10.3 见10-3.png
+
+10.4 这个和10-5sleep2.c的区别是alarm放到了setjmp前面,这样的问题在于如果alarm(seconds)和setjmp之间被内核阻塞了
+	 seconds,这时调用sig_alrm函数中的longjmp将发生意外错误,因为此时setjmp还未执行.
+
+10.5 
+
+10.6 
