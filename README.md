@@ -11,4 +11,4 @@ APUE学习，书上代码事无巨细都敲一遍及课后习题详解
 #### 第九章 -- [进程关系](https://github.com/fflyelephant/APUE/tree/master/ch9_ProcessRelationships)
 #### 第十章 -- [信号](https://github.com/fflyelephant/APUE/tree/master/ch10_Signals)
 #### 第十一章 -- [线程](https://github.com/fflyelephant/APUE/tree/master/ch11_Threads)
-#### 第十二章 -- [线程控制](https://github.com/fflyelephant/APUE/tree/master/ch10_Signals)
+#### 第十二章 -- [线程控制](https://github.com/fflyelephant/APUE/tree/master/ch12_ThreadsControl)
