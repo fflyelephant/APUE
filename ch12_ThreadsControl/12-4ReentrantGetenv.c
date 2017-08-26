@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
 
 /*
 1:mygetenv_r是线程安全的函数,而pthread_one指定的thread_init函数仅执行一次
-
+2:mygetenv_r也是可重入的函数
 
 stone@cdWSCMPL07:~/test_my/github_test/APUE/ch12_ThreadsControl$ ./a.out 
 thread_init  --> 可以看见,thread_init在两次调用中只执行了一次
