@@ -11,7 +11,16 @@
 #define LOCKFILE "/var/run/daemon.pid"
 #define LOCKMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
 
-extern int lockfile(int fd);
+/* 文件记录锁锁定整个文件内容同一时刻只允许一个进程更改文件内容 */
+static int lockfile(int fd)
+{
+	struct flock fl;
+	fl.l_type 	= F_WRLCK;
+	fl.l_start	= 0;
+	fl.l_whence	= SEEK_SET;
+	fl.l_len	= 0;
+	return(fcntl(fd, F_SETLK, &fl));
+}
 
 int already_running(void)
 {
