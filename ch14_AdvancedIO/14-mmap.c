@@ -3,8 +3,11 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
-#define COPYSIZE (1024*1024*1024)
+#define COPYSIZE (1024*1024)
 
 int main(int argc, char const *argv[])
 {
@@ -44,36 +47,37 @@ int main(int argc, char const *argv[])
 			copysz = COPYSIZE;
 		else
 			copysz = sbuf.st_size -fsz;
-
-		if((src = mmap(0, copysz, PROT_READ|PROT_WRITE, MAP_SHARED, fin, fsz)) == MAP_FAILED){
+		printf("copysz:%d fsz:%ld\n", copysz, fsz);
+		if((src = mmap(NULL, copysz, PROT_READ, MAP_SHARED, fin, fsz)) == MAP_FAILED){
+			perror("map fin error");
+			return -1;
+		}
+		
+		printf("copysz:%d fsz:%ld\n", copysz, fsz);
+		if((dst = mmap(NULL, copysz, PROT_WRITE, MAP_SHARED, fout, fsz)) == MAP_FAILED){
 			perror("map fin error");
 			return -1;
 		}
 
-		if((dst = mmap(0, copysz, PROT_READ|PROT_WRITE, MAP_SHARED, fin, fsz)) == MAP_FAILED){
-			perror("map fin error");
-			return -1;
-		}
 		memcpy(dst, src, copysz);
+		
+		printf("%d\n", getpid());
+		sleep(50);
 		munmap(src, copysz);
 		munmap(dst, copysz);
 		fsz += copysz;
 	}
-
-
 	return 0;
 }
-
-
 
 /*
 1:原型
 	void *mmap(void *addr, size_t len, int prot, int flag, int fd, off_t off);
 	函数将将一个已经open的文件映射到内存中,操作内存就像操作文件本身一样,可以越过read/write来读写文件
 2:参数
-	addr:指定文件映射之后内存起始地址,通常指定NULL,让内核返回选择并返回起始地址
+	addr:指定文件映射之后内存起始地址,通常指定NULL,让内核选择并返回起始地址
 	 len:映射区域的长度
-	prot:表示映射后内存区域的操作权限,四种取值(一般取值PROT_READ | PROT_WRITE,并且映射区域的权限要和open文件时的权限一致)
+	prot:表示映射后内存区域的操作权限,四种取值(一般取值PROT_READ | PROT_WRITE,并且映射区域的权限不能比open文件时的权限多)
 		 1:PROT_READ   --> 映射区域可读
 		 2:PROT_WRITE  --> 映射区域可写
 		 3:PROT_EXEC   --> 映射区域可执行
@@ -84,5 +88,5 @@ int main(int argc, char const *argv[])
 		 2:MAP_SHARED  --> 表示对映射区域的修改操作同步到真实文件
 		 3:MAP_PRIVATE --> 表示对映射区域的修改是存在某个副本中,不影响真实文件(MAP_SHARED和MAP_PRIVATE必须指定其一)
 	  fd:已打开的文件描述符
-	 off:表示映射文件的偏移量,一般为0表示从文件起始开始映射整个文件
+	 off:表示映射文件的偏移量,一般为0表示从文件起始处开始映射len文件长度
 */
