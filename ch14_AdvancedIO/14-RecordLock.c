@@ -5,7 +5,7 @@
 cmd:
 	F_GETLK:判断由flockptr描述的锁是否在fd文件中存在,如果存在,flockptr的内容将更新为此锁的信息,若不存在这样
 	的锁,除了l_type变为F_UNLCK以外,其余信息不变
-	F_SETLK:给文件fd设置flockptr描述的锁,失败的话立即返回errno等于EACCES或EAGAIN,l_type=F_UNLCK可以清楚锁
+	F_SETLK:给文件fd设置flockptr描述的锁,失败的话立即返回errno等于EACCES或EAGAIN,l_type=F_UNLCK可以清除锁
 	F_SETLKW:是F_SETLK的阻塞版本,如不能成功设置为导致休眠
 注: 
 	1:一般是用F_GETLK测试是否有这种锁,判断之后再使用F_SETLK设置锁,但这不是一个原子操作,中间可能会被其它进程
@@ -45,11 +45,11 @@ pid_t lock_test(int fd, int type, off_t offset, int whence, off_t len)
 		perror("F_GETLK error");
 		return -1;
 	}
-	/* 没有lock描述的锁 */
+	/* 文件中没有lock描述的锁 */
 	if(lock.l_type == F_UNLCK)
 		return 0;
 
-	/* lock描述的锁已存在,返回有此锁的pid */
+	/* lock描述的锁已存在,返回拥有此锁的进程pid */
 	return(lock.l_pid);
 }
 

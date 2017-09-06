@@ -7,7 +7,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define COPYSIZE (1024*1024)
+#define COPYSIZE (1024*1024)  // 一次拷贝1M大小(因为程序要用它来计算off值,所以必须是4096的整数倍)
 
 int main(int argc, char const *argv[])
 {
@@ -16,6 +16,7 @@ int main(int argc, char const *argv[])
 	size_t 		copysz;
 	struct stat	sbuf;
 	off_t 		fsz = 0;
+	printf("page_size:%d\n", getpagesize());
 
 	if(argc != 3){
 		printf("usage: %s <fromfile> <tofile>\n", argv[0]);
@@ -41,7 +42,7 @@ int main(int argc, char const *argv[])
 		perror("ftruncate error");
 		return -1;
 	}
-
+	printf("total size:%ld\n", sbuf.st_size);
 	while(fsz < sbuf.st_size){
 		if((sbuf.st_size - fsz) > COPYSIZE)
 			copysz = COPYSIZE;
@@ -60,12 +61,10 @@ int main(int argc, char const *argv[])
 		}
 
 		memcpy(dst, src, copysz);
-		
-		printf("%d\n", getpid());
-		sleep(50);
 		munmap(src, copysz);
 		munmap(dst, copysz);
 		fsz += copysz;
+		printf("\tremain size:%ld bytes\n", sbuf.st_size - fsz);		
 	}
 	return 0;
 }
@@ -88,5 +87,40 @@ int main(int argc, char const *argv[])
 		 2:MAP_SHARED  --> 表示对映射区域的修改操作同步到真实文件
 		 3:MAP_PRIVATE --> 表示对映射区域的修改是存在某个副本中,不影响真实文件(MAP_SHARED和MAP_PRIVATE必须指定其一)
 	  fd:已打开的文件描述符
-	 off:表示映射文件的偏移量,一般为0表示从文件起始处开始映射len文件长度
+	 off:表示映射文件的偏移量,一般为0表示从文件起始处开始映射len文件长度并且长度是pagesize的整数倍！
+
+
+stone@cdWSCMPL07:~/test_my/github_test/APUE/ch14_AdvancedIO$ ls -l openswan-2.6.43.1.tar.gz 
+-rw-rw-r-- 1 stone stone 8799161 Sep  6 09:47 openswan-2.6.43.1.tar.gz
+stone@cdWSCMPL07:~/test_my/github_test/APUE/ch14_AdvancedIO$ ./a.out openswan-2.6.43.1.tar.gz test.tar.gz
+page_size:4096
+total size:8799161
+copysz:1048576 fsz:0
+copysz:1048576 fsz:0
+        remain size:7750585 bytes
+copysz:1048576 fsz:1048576
+copysz:1048576 fsz:1048576
+        remain size:6702009 bytes
+copysz:1048576 fsz:2097152
+copysz:1048576 fsz:2097152
+        remain size:5653433 bytes
+copysz:1048576 fsz:3145728
+copysz:1048576 fsz:3145728
+        remain size:4604857 bytes
+copysz:1048576 fsz:4194304
+copysz:1048576 fsz:4194304
+        remain size:3556281 bytes
+copysz:1048576 fsz:5242880
+copysz:1048576 fsz:5242880
+        remain size:2507705 bytes
+copysz:1048576 fsz:6291456
+copysz:1048576 fsz:6291456
+        remain size:1459129 bytes
+copysz:1048576 fsz:7340032
+copysz:1048576 fsz:7340032
+        remain size:410553 bytes
+copysz:410553 fsz:8388608
+copysz:410553 fsz:8388608
+        remain size:0 bytes
+
 */
