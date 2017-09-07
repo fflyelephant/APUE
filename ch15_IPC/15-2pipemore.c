@@ -9,7 +9,7 @@
 int main(int argc, char const *argv[])
 {
 	int fd[2], pid;
-	char line[64] = {0};
+	char line[4096] = {0};
 	FILE *fp;
 	if(argc != 2){
 		printf("usage: a.out <filename>\n");
@@ -36,7 +36,6 @@ int main(int argc, char const *argv[])
 				perror("write to pipe error");
 				return -1;
 			}
-			printf("line:%s\n", line);
 		}
 		close(fd[1]);
 		waitpid(pid, NULL, 0);
