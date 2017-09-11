@@ -103,7 +103,7 @@ int main(int argc, char const *argv[])
 	q
 	QUIT
 
-	caught SIGPIPE
+	caught SIGPIPE -->当只write to fd[1]没有进程read from fd[0]是会产生SIGPIPE信号
 */
 
 
