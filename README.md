@@ -12,3 +12,7 @@ APUE学习，书上代码事无巨细都敲一遍及课后习题详解
 #### 第十章   -- [信号](https://github.com/fflyelephant/APUE/tree/master/ch10_Signals)
 #### 第十一章 -- [线程](https://github.com/fflyelephant/APUE/tree/master/ch11_Threads)
 #### 第十二章 -- [线程控制](https://github.com/fflyelephant/APUE/tree/master/ch12_ThreadsControl)
+#### 第十三章 -- [守护进程](https://github.com/fflyelephant/APUE/tree/master/ch13_DaemonProcesses)
+#### 第十四章 -- [高级IO](https://github.com/fflyelephant/APUE/tree/master/ch14_AdvancedIO)
+#### 第十五章 -- [进程间通信](https://github.com/fflyelephant/APUE/tree/master/ch15_IPC)
+#### 第十七章 -- [高级进程间通信](https://github.com/fflyelephant/APUE/tree/master/ch17_AdvancedIPC)
